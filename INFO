@@ -1,0 +1,308 @@
+Assignment 0:
+1. Change the output to indicate the sum of all preferences achieved for each group. In Matching the employees achieved (2+2+1+1 = 6) and the applicants achieved (3+3+3+3=12)
+    def calculate_preference_sum(person_dict):
+    sum_of_preferences = 0
+    for person in person_dict.values():
+        if person.partner:
+            sum_of_preferences += person.rank
+    return sum_of_preferences
+
+    print("Sum of preferences for employers:", calculate_preference_sum(employers))
+    print("Sum of preferences for applicants:", calculate_preference_sum(applicants))
+2. Create an example for which the results are the same, no matter who proposes.
+    For this segment of the assignment I kept the same structures from match.py and match2.py but adjusted the txt files
+    (ApplicantsEX.txt and EmployersEX.txt) With this I decided to make each side equal 8 for a total of 16. I played with
+    the original files however I could not find a solution where the sums were equal. Whereas in the data pools that I
+    created I was able to manually adjust them to ensure that both sides had the same sums. I do think that it would be
+    possible to have the sums equal to each other without composing my own data file however, it would change a bit of
+    the original algorithm. I also created a version with two applicants and two employers which was much easier to make
+    the sums equal.
+    The Applicant file I created:
+        a: E,H,G,F
+        b: E,F,G,H
+        c: F,G,E,H
+        d: G,E,H,F
+    The Employer File I created:
+        E: a,b,c,d
+        F: c,b,d,a
+        G: a,c,b,d
+        H: c,a,d,b
+
+MY OUTPUTS PER FILE:
+
+match.py - The original project with "Sum of Preferences" added.
+    OUTPUT:
+        /home/rylei/Documents/CS5110/Project0/.venv/bin/python /home/rylei/Documents/CS5110/Project0/match.py
+        working with files  ('Employers.txt', 'Applicants.txt', True)
+        Unmatched employers  ['a', 'b', 'c', 'd']
+        a proposes to B
+           B accepts the proposal
+        Tentative Pairings are as follows:
+        a 1 is paired with B 4
+        b is NOT paired
+        c is NOT paired
+        d is NOT paired
+        Unmatched employers  ['b', 'c', 'd']
+        b proposes to C
+           C accepts the proposal
+        Tentative Pairings are as follows:
+        a 1 is paired with B 4
+        b 1 is paired with C 3
+        c is NOT paired
+        d is NOT paired
+        Unmatched employers  ['c', 'd']
+        c proposes to D
+           D accepts the proposal
+        Tentative Pairings are as follows:
+        a 1 is paired with B 4
+        b 1 is paired with C 3
+        c 1 is paired with D 3
+        d is NOT paired
+        Unmatched employers  ['d']
+        d proposes to C
+           C rejects the proposal
+        Tentative Pairings are as follows:
+        a 1 is paired with B 4
+        b 1 is paired with C 3
+        c 1 is paired with D 3
+        d is NOT paired
+        Unmatched employers  ['d']
+        d proposes to B
+           B accepts the proposal
+        Tentative Pairings are as follows:
+        a is NOT paired
+        b 1 is paired with C 3
+        c 1 is paired with D 3
+        d 2 is paired with B 3
+        Unmatched employers  ['a']
+        a proposes to A
+           A accepts the proposal
+        Tentative Pairings are as follows:
+        a 2 is paired with A 3
+        b 1 is paired with C 3
+        c 1 is paired with D 3
+        d 2 is paired with B 3
+        Final Pairings are as follows:
+        a 2 is paired with A 3
+        b 1 is paired with C 3
+        c 1 is paired with D 3
+        d 2 is paired with B 3
+        Sum of preferences for employers: 6
+        Sum of preferences for applicants: 12
+
+        Process finished with exit code 0
+match2.py - The Applicants are now picking Employers
+    OUTPUT:
+        /home/rylei/Documents/CS5110/Project0/.venv/bin/python /home/rylei/Documents/CS5110/Project0/match2.py
+        working with files  ('Employers.txt', 'Applicants.txt', True)
+        Unmatched applicants  ['A', 'B', 'C', 'D']
+        A proposes to d
+           d accepts the proposal
+        Tentative Pairings are as follows:
+        a is NOT paired
+        b is NOT paired
+        c is NOT paired
+        d 4 is paired with A 1
+        Unmatched applicants  ['B', 'C', 'D']
+        B proposes to c
+           c accepts the proposal
+        Tentative Pairings are as follows:
+        a is NOT paired
+        b is NOT paired
+        c 4 is paired with B 1
+        d 4 is paired with A 1
+        Unmatched applicants  ['C', 'D']
+        C proposes to a
+           a accepts the proposal
+        Tentative Pairings are as follows:
+        a 4 is paired with C 1
+        b is NOT paired
+        c 4 is paired with B 1
+        d 4 is paired with A 1
+        Unmatched applicants  ['D']
+        D proposes to a
+           a accepts the proposal
+        Tentative Pairings are as follows:
+        a 3 is paired with D 1
+        b is NOT paired
+        c 4 is paired with B 1
+        d 4 is paired with A 1
+        Unmatched applicants  ['C']
+        C proposes to c
+           c accepts the proposal
+        Tentative Pairings are as follows:
+        a 3 is paired with D 1
+        b is NOT paired
+        c 3 is paired with C 2
+        d 4 is paired with A 1
+        Unmatched applicants  ['B']
+        B proposes to b
+           b accepts the proposal
+        Tentative Pairings are as follows:
+        a 3 is paired with D 1
+        b 2 is paired with B 2
+        c 3 is paired with C 2
+        d 4 is paired with A 1
+        Final Pairings are as follows:
+        a 3 is paired with D 1
+        b 2 is paired with B 2
+        c 3 is paired with C 2
+        d 4 is paired with A 1
+        Sum of preferences for employers: 12
+        Sum of preferences for applicants: 6
+
+        Process finished with exit code 0
+match3.py - The Employers are picking but the Sums of Preferences are equal to the Applicants
+    OUTPUT:
+        /home/rylei/Documents/CS5110/Project0/.venv/bin/python /home/rylei/Documents/CS5110/Project0/match3.py
+        working with files  ('EmployersEX.txt', 'ApplicantsEX.txt', True)
+        Unmatched employers  ['E', 'F', 'G', 'H']
+        E proposes to a
+           a accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F is NOT paired
+        G is NOT paired
+        H is NOT paired
+        Unmatched employers  ['F', 'G', 'H']
+        F proposes to c
+           c accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G is NOT paired
+        H is NOT paired
+        Unmatched employers  ['G', 'H']
+        G proposes to a
+           a rejects the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G is NOT paired
+        H is NOT paired
+        Unmatched employers  ['G', 'H']
+        G proposes to c
+           c rejects the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G is NOT paired
+        H is NOT paired
+        Unmatched employers  ['G', 'H']
+        G proposes to b
+           b accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H is NOT paired
+        Unmatched employers  ['H']
+        H proposes to c
+           c rejects the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H is NOT paired
+        Unmatched employers  ['H']
+        H proposes to a
+           a rejects the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H is NOT paired
+        Unmatched employers  ['H']
+        H proposes to d
+           d accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H 3 is paired with d 3
+        Final Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H 3 is paired with d 3
+        Sum of preferences for employers: 8
+        Sum of preferences for applicants: 8
+
+        Process finished with exit code 0
+match4.py - The Applicants are picking but the Sums of Preferences are equal to the Employers
+    OUTPUT:
+        /home/rylei/Documents/CS5110/Project0/.venv/bin/python /home/rylei/Documents/CS5110/Project0/match4.py
+        working with files  ('EmployersEX.txt', 'ApplicantsEX.txt', True)
+        Unmatched applicants  ['a', 'b', 'c', 'd']
+        a proposes to E
+           E accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F is NOT paired
+        G is NOT paired
+        H is NOT paired
+        Unmatched applicants  ['b', 'c', 'd']
+        b proposes to E
+           E rejects the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F is NOT paired
+        G is NOT paired
+        H is NOT paired
+        Unmatched applicants  ['b', 'c', 'd']
+        b proposes to F
+           F accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 2 is paired with b 2
+        G is NOT paired
+        H is NOT paired
+        Unmatched applicants  ['c', 'd']
+        c proposes to F
+           F accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G is NOT paired
+        H is NOT paired
+        Unmatched applicants  ['d', 'b']
+        d proposes to G
+           G accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 4 is paired with d 1
+        H is NOT paired
+        Unmatched applicants  ['b']
+        b proposes to G
+           G accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H is NOT paired
+        Unmatched applicants  ['d']
+        d proposes to E
+           E rejects the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H is NOT paired
+        Unmatched applicants  ['d']
+        d proposes to H
+           H accepts the proposal
+        Tentative Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H 3 is paired with d 3
+        Final Pairings are as follows:
+        E 1 is paired with a 1
+        F 1 is paired with c 1
+        G 3 is paired with b 3
+        H 3 is paired with d 3
+        Sum of preferences for employers: 8
+        Sum of preferences for applicants: 8
+
+        Process finished with exit code 0

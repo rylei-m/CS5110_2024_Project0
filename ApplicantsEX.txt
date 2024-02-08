@@ -1,0 +1,4 @@
+a: E,H,G,F
+b: E,F,G,H
+c: F,G,E,H
+d: G,E,H,F
